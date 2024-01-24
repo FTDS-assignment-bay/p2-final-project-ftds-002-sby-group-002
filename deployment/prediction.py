@@ -139,28 +139,28 @@ def run():
         # Predict Classification
         y_inf_pred = model.predict(data_inf)
         data_inf['subscribed'] = y_inf_pred
-        if y_inf_pred == 0:
-            data_inf_num_col = data_inf[list_num]
-            data_inf_cat_col = data_inf[list_cat]
-            list_num_s = scaler.transform(data_inf_num_col)
-            # list_num_pca = pca.transform(list_num_s)
-            df_final = np.concatenate([list_num_s, data_inf_cat_col], axis=1)
-            df_final = pd.DataFrame(df_final, columns=["age", "balance", "day", 
-                                                       "duration", "campaign", "days_passed",
-                                                        "previous"] + list_cat)
-            df_final = df_final.infer_objects()
+        # if y_inf_pred == 0:
+        #     data_inf_num_col = data_inf[list_num]
+        #     data_inf_cat_col = data_inf[list_cat]
+        #     list_num_s = scaler.transform(data_inf_num_col)
+        #     # list_num_pca = pca.transform(list_num_s)
+        #     df_final = np.concatenate([list_num_s, data_inf_cat_col], axis=1)
+        #     df_final = pd.DataFrame(df_final, columns=["age", "balance", "day", 
+        #                                                "duration", "campaign", "days_passed",
+        #                                                 "previous"] + list_cat)
+        #     df_final = df_final.infer_objects()
 
-            # Get the position of categorical columns
+        #     # Get the position of categorical columns
 
-            index_cat_columns = [df_final.columns.get_loc(col) for col in list_cat]
-            # Predict Cluster
-            y_cluster = kpmodel.predict(df_final, categorical=index_cat_columns)
-            data_inf['cluster'] = y_cluster
-            st.write('# Cluster :', y_cluster)
-            # Preduct Clustering
-            st.write('# Subscribed : ', str(y_inf_pred)) 
-        else:
-            st.write('# Subscribed : ', str(y_inf_pred))
+        #     index_cat_columns = [df_final.columns.get_loc(col) for col in list_cat]
+        #     # Predict Cluster
+        #     y_cluster = kpmodel.predict(df_final, categorical=index_cat_columns)
+        #     data_inf['cluster'] = y_cluster
+        #     st.write('# Cluster :', y_cluster)
+        #     # Preduct Clustering
+        #     st.write('# Subscribed : ', str(y_inf_pred)) 
+        # else:
+        st.write('# Subscribed : ', str(y_inf_pred))
 # if y_inf_pred == 1 :
 #     y_cluster = model.predict(data_inf)
 #     str.write('### Client termasuk kedalam kelompok',y_cluster)
